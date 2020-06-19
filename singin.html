@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/loader.css">
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/form.css">
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
@@ -35,7 +34,7 @@
             </nav>
         </header>
 
-        <form id="singIn-form" method="post">
+        <form name="singInForm" id="singIn-form" method="post" onsubmit="validateSingInForm()">
             <h1 class="form-title">Sing in form</h1>
             <div class="form">
                 <div class="input-form">
@@ -51,10 +50,10 @@
                     <label for="email">Email :</label>
                 </div>
                 <div class="input-form">
+                    <span class="error" id="error"><p></p></span>
                     <input class="input-text" type="password" placeholder="Password" id="password" name="email">
                     <label for="password">Password :</label>
                 </div>
-                    <span class="error"> test</span>
                     <button type="submit" id="submit-btn">Sing in</button>
             </div>
         </form>
@@ -62,5 +61,7 @@
         <footer class="footer" id="footer">
             <p class="footer-text">Copyright &copy; | 2020 - 2025 | Tous droits réservés </p>
         </footer>
+
+    <script src="js/app.js"></script>
     </body>
 </html>

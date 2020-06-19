@@ -43,6 +43,10 @@ input.input-text:focus {
     border-bottom: 3px solid #FE8800;
 }
 
+input.error {
+    border-bottom: 3px solid red;
+}
+
 #submit-btn {
     border: none;
     font-size: 18px;
@@ -65,4 +69,9 @@ input.input-text:focus {
     transform: translate(0px, 5px);
     -webkit-transform: translate(0px, 5px);
     border-bottom: 1px solid;
+}
+
+span.error p{
+    font-weight: 900;
+    color: red;
 }

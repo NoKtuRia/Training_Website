@@ -34,7 +34,7 @@
             </nav>
         </header>
 
-        <form name="singInForm" id="singIn-form" method="post" onsubmit="validateSingInForm()">
+        <form name="singInForm" id="singIn-form" method="post" action="login.html">
             <h1 class="form-title">Sing in form</h1>
             <div class="form">
                 <div class="input-form">
@@ -51,7 +51,7 @@
                 </div>
                 <div class="input-form">
                     <span class="error"><p id="error"></p></span>
-                    <input class="input-text" type="password" placeholder="Password" id="password" name="email">
+                    <input class="input-text" type="password" placeholder="Password" id="password" name="password">
                     <label for="password">Password :</label>
                 </div>
                     <button type="submit" id="submit-btn">Sing in</button>
@@ -62,6 +62,6 @@
             <p class="footer-text">Copyright &copy; | 2020 - 2025 | Tous droits réservés </p>
         </footer>
 
-    <script src="js/app.js"></script>
+    <script src="js/verif.js"></script>
     </body>
 </html>

@@ -3,7 +3,6 @@ const path = require('path');
 const { Pool, Client} = require('pg');
 const bodyParser  = require('body-parser');
 const app = express();
-let error;
 
 let pool = new Pool({
     user: 'postgres',
@@ -48,10 +47,9 @@ app.post('/login.html', (req, res) => {
         console.log(err, res);
     });
 
-    if (error) {
-        console.log(error);
-    }
-
+    pool.query(`SELECT * FROM members WHERE user_name = 'user_name'`, (err, res) => {
+        console.log(err, res);
+    });
 });
 
 app.get('/login.html', (req, res) => {

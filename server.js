@@ -41,14 +41,25 @@ app.post('/login.html', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
 
-    let sqlInsert = `INSERT INTO members(user_name, user_pseudo, user_email, user_password) VALUES('${name}', '${pseudo}', '${email}', '${password}') RETURNING *`;
+    pool.query(`SELECT * FROM members WHERE user_pseudo='${pseudo}'`, (error, results, ) => {
+        if (results.rows.lenght === 0)  {
+            pool.query(`SELECT * FROM members WHERE user_email='${email}'`, (error, results, ) => {
+                if (results.rows.length === 0) {
+                    let sqlInsert = `INSERT INTO members(user_name, user_pseudo, user_email, user_password) VALUES('${name}', '${pseudo}', '${email}', '${password}') RETURNING *`;
 
-    pool.query(sqlInsert, (err, res) => {
-        console.log(err, res);
-    });
-
-    pool.query(`SELECT * FROM members WHERE user_name = 'user_name'`, (err, res) => {
-        console.log(err, res);
+                    pool.query(sqlInsert, (err, res) => {
+                        console.log(err, res);
+                    });
+                    
+                } else {
+                    console.log('Un utilisateur possède deja cet email');
+                    res.sendFile('singin.html');
+                    req.body.error.innerHTML = 'Test';
+                }
+            });
+        } else {
+            console.log('Un utilisateur possède deja ce pseudo');
+        }
     });
 });
 
@@ -57,6 +68,21 @@ app.get('/login.html', (req, res) => {
     res.status(200);
 });
 
+app.post('/profile.html', (req, res) => {
+    res.sendFile(path.join( __dirname + '/profile.html'));
+    res.status(200);
+
+    let logMail = req.body.logEmail;
+    let logPasswd = req.body.logPassword;
+
+    let sqlSelect = `SELECT * FROM members WHERE user_email = '${logMail}' AND user_password = '${logPasswd}'`;
+});
+
+app.get('/profile.html', (req, res) => {
+    res.sendFile(path.join( __dirname + '/profile.html'));
+    res.status(200);
+});
+
 app.listen(63334, () => {
-    console.log('Server is running');
+    console.log('Server is listening on 63334 port');
 });

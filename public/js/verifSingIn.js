@@ -1,10 +1,10 @@
-let singForm = document.getElementById('singIn-form');
+const singForm = document.getElementById('singIn-form');
 singForm.addEventListener('submit', (e) => {
     let error;
 
     let inputs = document.getElementsByTagName("input");
 
-    for(let i = 0; i < inputs.length; i++) {
+    for (let i = 0; i < inputs.length; i++) {
         console.log(inputs[i]);
         if (!inputs[i].value) {
             e.preventDefault();
@@ -23,7 +23,9 @@ singForm.addEventListener('submit', (e) => {
         e.preventDefault();
         name.style.borderBottom = "3px solid red";
         error = "* Votre nom est trop long.";
-    } else {
+    }else if (name.value === '') {
+        name.style.borderBottom = "3px solid red";
+    }  else {
         name.style.borderBottom = "3px solid #8FCF3C";
     }
 
@@ -31,7 +33,9 @@ singForm.addEventListener('submit', (e) => {
         e.preventDefault();
         pseudo.style.borderBottom = "3px solid red";
         error = "* Votre pseudo est trop long.";
-    } else {
+    }else if (pseudo.value === '') {
+        pseudo.style.borderBottom = "3px solid red";
+    }  else {
         pseudo.style.borderBottom = "3px solid #8FCF3C";
     }
 
@@ -39,6 +43,8 @@ singForm.addEventListener('submit', (e) => {
         e.preventDefault();
         email.style.borderBottom = "3px solid red";
         error = "* Votre mail est trop long."
+    } else if (email.value === '') {
+        email.style.borderBottom = "3px solid red";
     } else {
         email.style.borderBottom = "3px solid #8FCF3C";
     }
@@ -47,49 +53,11 @@ singForm.addEventListener('submit', (e) => {
         e.preventDefault();
         password.style.borderBottom = "3px solid red";
         error = "* Votre mot de passe doit contenir entre 6 et 16 caractères";
-    } else {
+    }else if (password.value === '') {
+        password.style.borderBottom = "3px solid red";
+    }  else {
         password.style.borderBottom = "3px solid #8FCF3C";
     }
-
-    /*if (name.length < 50) {
-        document.getElementById('name').style.borderBottom = "3px solid #64D501";
-        return true;
-    }
-    
-    else if (pseudo.length < 50) {
-        document.getElementById('pseudo').style.borderBottom = "3px solid #64D501";
-        return true;
-    }
-
-    else if (email.length < 155) {
-        document.getElementById('email').style.borderBottom = "3px solid #64D501";
-        return true;
-    }
-
-    else if (password.length < 16) {
-        document.getElementById('password').style.borderBottom = "3px solid #64D501";
-        return true;
-    }
-
-    else if (password.length > 16) {
-            error = "*Mot de passe trop long ou trop court(entre 6 et 16 caractères).";
-            document.getElementById('password').style.borderBottom = "3px solid red";
-    }
-
-     else if (email.length > 155) {
-             error = "*Email trop long ou trop court.";
-             document.getElementById('email').style.borderBottom = "3px solid red";
-    }
-
-    else if (pseudo.length > 50) {
-        error = "*Pseudo trop long.";
-        document.getElementById('pseudo').style.borderBottom = "3px solid red";
-    }
-
-    else if (name.length > 50) {
-        error = "*Nom trop long.";
-        document.getElementById('name').style.borderBottom = "3px solid red";
-    }*/
 
     if (error) {
         document.getElementById('error').textContent = error;

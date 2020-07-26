@@ -33,7 +33,6 @@ app.get('/singin.html', (req, res) => {
 });
 
 app.post('/login.html', (req, res) => {
-    res.sendFile(path.join( __dirname + '/login.html'));
     res.status(200);
 
     let name = req.body.name;
@@ -50,15 +49,17 @@ app.post('/login.html', (req, res) => {
                     pool.query(sqlInsert, (err, res) => {
                         console.log(err, res);
                     });
-                    
+
+                    res.sendFile(path.join( __dirname + '/login.html'));
+
                 } else {
                     console.log('Un utilisateur possède deja cet email');
-                    res.sendFile('singin.html');
-                    req.body.error.innerHTML = 'Test';
+                    res.sendFile(path.join( __dirname + '/singin.html'));
                 }
             });
         } else {
             console.log('Un utilisateur possède deja ce pseudo');
+            res.sendFile(path.join( __dirname + '/singin.html'));
         }
     });
 });
@@ -75,7 +76,13 @@ app.post('/profile.html', (req, res) => {
     let logMail = req.body.logEmail;
     let logPasswd = req.body.logPassword;
 
-    let sqlSelect = `SELECT * FROM members WHERE user_email = '${logMail}' AND user_password = '${logPasswd}'`;
+    pool.query(`SELECT * FROM members WHERE user_email = '${logMail}' AND user_password = '${logPasswd}'`, (error, result) => {
+        if (result.rows.lenght === 0) {
+            console.log('Utilisateur bien connecter');
+        } else {
+            console.log('Mauvais identifiants');
+        }
+    });
 });
 
 app.get('/profile.html', (req, res) => {
